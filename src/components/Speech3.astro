@@ -5,8 +5,8 @@ import FooterMenu from "./FooterMenu.astro"
 
 <Section
   title="Speech 3"
-  subtitle="Ladies and Gentlemen, esteemed guests, beloved families, and most importantly, my fellow graduates It is with great honor and profound joy that I stand before you today, as we celebrate an Another achievement in our lives. Today marks the culmination of a journey that began in this institution , a journey filled with dedication, perseverance, and the shared pursuit of mastering the English language. Reflecting on the past few years, it's impossible not to marvel at how far we've come. When we embarked on this path, many of us were filled with trepidation, uncertain of our abilities and doubting whether we could rise to the challenge. Yet, despite the obstacles and the unforeseen global events that reshaped our world, we persevered. We adapted, we grew, and we thrived. This journey has been about more than learning a new language. It has been about embracing a new culture, broadening our perspectives, and connecting with others in ways that would have been impossible otherwise. We have learned to think critically, to express ourselves clearly and convincingly, and to listen with empathy and understanding. None of this would have been possible without the unwavering support of our different teachers, who not only imparted knowledge but also inspired us to push beyond our limits. They believed in our potential even when we doubted it ourselves. To them, we owe a debt of gratitude that words can scarcely express. To our families and friends, thank you for your patience, encouragement, and love. Your support has been our anchor and our motivation, driving us to achieve our goals and to persevere through the toughest times. And to my fellow graduates, I am incredibly proud of each and every one of you. We have proven that with determination and hard work, we can overcome any challenge. We have not only learned a language; we have gained confidence, resilience, and the courage to face the unknown. Today, we celebrate not just the end of our course but the beginning of a new chapter in our lives. Let us step into this future with hope, courage, and the knowledge that we are equipped to make a difference. Congratulations, Class C1 of 2024. Thank you."
-  color="white"
+  subtitle="Ladies and Gentlemen, esteemed guests, beloved families, and most importantly, my fellow graduates.<br>It is with great honor and profound joy that I stand before you today, as we celebrate an Another achievement in our lives. Today marks the culmination of a journey that began in this institution , a journey filled with dedication, perseverance, and the shared pursuit of mastering the English language.<br>Reflecting on the past few years, it's impossible not to marvel at how far we've come. When we embarked on this path, many of us were filled with trepidation, uncertain of our abilities and doubting whether we could rise to the challenge. Yet, despite the obstacles and the unforeseen global events that reshaped our world, we persevered. We adapted, we grew, and we thrived.<br>This journey has been about more than learning a new language. It has been about embracing a new culture, broadening our perspectives, and connecting with others in ways that would have been impossible otherwise.<br>We have learned to think critically, to express ourselves clearly and convincingly, and to listen with empathy and understanding. None of this would have been possible without the unwavering support of our different teachers, who not only imparted knowledge but also inspired us to push beyond our limits. They believed in our potential even when we doubted it ourselves. To them, we owe a debt of gratitude that words can scarcely express.<br>To our families and friends, thank you for your patience, encouragement, and love. Your support has been our anchor and our motivation, driving us to achieve our goals and to persevere through the toughest times.<br>And to my fellow graduates, I am incredibly proud of each and every one of you. We have proven that with determination and hard work, we can overcome any challenge. We have not only learned a language; we have gained confidence, resilience, and the courage to face the unknown.<br>Today, we celebrate not just the end of our course but the beginning of a new chapter in our lives. Let us step into this future with hope, courage, and the knowledge that we are equipped to make a difference.<br>Congratulations, Class C1 of 2024."  color="white"
+  subtitle2="Thank you."  color="white"
   id="speech-3"
   imageSrc="/model-y.webp"
   name="Persona 3"
@@ -16,4 +16,38 @@ import FooterMenu from "./FooterMenu.astro"
   <div slot="footer" style="margin-top: 30px; display: flex; justify-content: center;">
     <FooterMenu />
   </div>
+
+  <style>
+    /* Estilos para móvil pequeño */
+    @media (max-width: 360px) {
+      #speech-3 {
+        font-size: 14px;
+        line-height: 1.2;
+      }
+    }
+  
+    /* Estilos para móvil medio */
+    @media (min-width: 361px) and (max-width: 375px) {
+      #speech-3 {
+        font-size: 16px;
+        line-height: 1.3;
+      }
+    }
+  
+    /* Estilos para móvil grande */
+    @media (min-width: 376px) and (max-width: 720px) {
+      #speech-3 {
+        font-size: 18px;
+        line-height: 1.4;
+      }
+    }
+  
+    /* Estilos para tablet y superior */
+    @media (min-width: 721px) {
+      #speech-3 {
+        font-size: 20px;
+        line-height: 1.5;
+      }
+    }
+  </style>
 </Section>

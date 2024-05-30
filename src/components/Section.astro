@@ -1,5 +1,5 @@
 ---
-const { color, title, subtitle, id, imageSrc, name, description, showFooterContent } = Astro.props;
+const { color, title, subtitle, subtitle2, id, imageSrc, name, description, showFooterContent } = Astro.props;
 const textColor = 'text-black';
 import FooterMenu from './FooterMenu.astro';
 ---
@@ -17,6 +17,9 @@ import FooterMenu from './FooterMenu.astro';
       </h2>
       <p class={`text-black text-sm`} style="background-color: transparent; padding: 50px 20px; line-height: 1.6; margin: 0 auto; max-width: 800px; font-size: 18px;">
         {subtitle}
+      </p>
+      <p class={`text-black text-sm`} style="background-color: transparent; padding: 50px 20px; line-height: 1.6; margin: 0 auto; max-width: 800px; font-size: 18px;">
+        {subtitle2}
       </p>
     </header>
 

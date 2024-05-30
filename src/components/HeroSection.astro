@@ -20,9 +20,49 @@ import Section from "./Section.astro"
 
   <video
     slot="background"
-    class="object-center object-cover h-full w-full"
+    id="background-video"
     autoplay
     muted
     loop
     src="/video.webm"></video>
 </Section>
+
+<style>
+  /* Estilos para PC */
+  @media (min-width: 721px) {
+    #home {
+      font-size: 20px;
+    }
+
+    #background-video {
+      width: 100%;
+      height: 100vh; /* Ajusta la altura al 100% de la altura de la pantalla */
+      object-fit: cover; /* Mantiene la relación de aspecto del video, recortándolo si es necesario */
+    }
+  }
+  /* Estilos para móvil medio */
+  @media (min-width: 361px) and (max-width: 375px) {
+    #home {
+      font-size: 16px;
+    }
+  
+    #background-video {
+      width: 100%;
+      height: 100vh; /* Ajusta la altura al 100% de la altura de la pantalla */
+      object-fit: cover; /* Mantiene la relación de aspecto del video, recortándolo si es necesario */
+    }
+  }
+  
+  /* Estilos para móvil grande */
+  @media (min-width: 376px) and (max-width: 720px) {
+    #home {
+      font-size: 18px;
+    }
+  
+    #background-video {
+      width: 100%;
+      height: 100vh; /* Ajusta la altura al 100% de la altura de la pantalla */
+      object-fit: cover; /* Mantiene la relación de aspecto del video, recortándolo si es necesario */
+    }
+  }
+</style>
