@@ -1,0 +1,33 @@
+---
+import HeroSection from "../components/HeroSection.astro";
+import LandingHeader from "../components/LandingHeader.astro";
+import Speech1 from "../components/Speech1.astro";
+import Speech2 from "../components/Speech2.astro";
+import Speech3 from "../components/Speech3.astro";
+import Layout from "../layouts/Layout.astro";
+import FooterMenu from "../components/FooterMenu.astro";
+---
+
+<Layout title="Tesla - El coche de tus sueños (y de Elon Musk)">
+  <LandingHeader />
+
+  <main
+    class="snap-y snap-mandatory relative w-full h-screen overflow-y-auto overflow-x-hidden scroll-smooth"
+  >
+    <div class="snap-center">
+      <HeroSection />
+    </div>
+    <div class="snap-center">
+      <Speech1 />
+    </div>
+    <div class="snap-center">
+      <Speech2 />
+    </div>
+    <div class="snap-center">
+      <Speech3 />
+    </div>
+    <div class="snap-center">
+      <FooterMenu />
+    </div>
+  </main>
+</Layout>
