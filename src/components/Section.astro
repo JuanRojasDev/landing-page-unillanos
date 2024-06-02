@@ -1,9 +1,7 @@
 ---
-const { color, title, subtitle, subtitle2, id, imageSrc, name, description, showFooterContent } = Astro.props;
+const { color, title, subtitle, id, imageSrc, name, description, reverseLayout, hideFooter } = Astro.props;
 const textColor = 'text-black';
-import FooterMenu from './FooterMenu.astro';
 ---
-
 
 <section
   class="landing-section bg-white min-h-screen w-full text-center overflow-hidden relative"
@@ -15,15 +13,12 @@ import FooterMenu from './FooterMenu.astro';
       <h2 class={`${textColor} pt-20 text-[40px] font-medium`}>
         {title}
       </h2>
-      <p class={`text-black text-sm`} style="background-color: transparent; padding: 50px 20px; line-height: 1.6; margin: 0 auto; max-width: 800px; font-size: 18px;">
+      <p class="text-black text-sm" style="background-color: transparent; padding: 50px 20px; line-height: 1.6; margin: 0 auto; max-width: 800px; font-size: 18px;">
         {subtitle}
-      </p>
-      <p class={`text-black text-sm`} style="background-color: transparent; padding: 50px 20px; line-height: 1.6; margin: 0 auto; max-width: 800px; font-size: 18px;">
-        {subtitle2}
       </p>
     </header>
 
-    <div class="flex flex-row items-start justify-start mt-6">
+    <div class={`flex flex-col items-start ${reverseLayout ? 'flex-row-reverse' : 'flex-row'} mt-6`}>
       <img src={imageSrc} alt={name} class="w-32 h-32 rounded-full object-cover" />
       <div class="flex flex-col items-start ml-6">
         <h3 class="text-lg font-semibold mt-4">{name}</h3>
@@ -32,13 +27,146 @@ import FooterMenu from './FooterMenu.astro';
       </div>
     </div>
 
-    <footer class="flex flex-col flex-grow justify-end pb-20">
-      <slot name="footer" />
-      {showFooterContent && <FooterMenu />}
-    </footer>
-  </div>
+    {id === 'speech-3' && (
+      <div class="carousel-container">
+        <div class="carousel-track" id="carousel-track">
+          {Array.from({ length: 13 }).map((_, i) => (
+            <div class="carousel-slide" style={{ flex: '0 0 100%' }}>
+              <img src="/model-y.webp" alt={`Student ${i + 1}`} class="student-image" />
+              <div class="student-info">
+                <p class="student-name">Student {i + 1}</p>
+                <p class="student-subtitle">Subtitle {i + 1}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button class="carousel-control prev" id="prev">&#10094;</button>
+        <button class="carousel-control next" id="next">&#10095;</button>
+      </div>
+    )}
 
   <div class="absolute top-0 bottom-0 h-full w-full z-10">
     <slot name="background" />
   </div>
 </section>
+
+<style>
+  .landing-section {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  const track = document.getElementById('carousel-track');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+
+  let currentIndex = 0;
+  const slides = Array.from(track.children);
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  const intervalTime = 3000; // Intervalo de 3 segundos
+
+  // Función para mover al siguiente slide
+  const moveToNextSlide = () => {
+    currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+    moveToSlide(currentIndex);
+  };
+
+  // Función para mover al slide indicado
+  const moveToSlide = (targetIndex) => {
+    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+    currentIndex = targetIndex;
+  };
+
+  // Iniciar el carrusel automático
+  const startCarousel = () => {
+    setInterval(moveToNextSlide, intervalTime);
+  };
+
+  // Iniciar el carrusel automáticamente
+  startCarousel();
+
+  // Event listeners para los botones de control
+  prevButton.addEventListener('click', e => {
+    currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+    moveToSlide(currentIndex);
+  });
+
+  nextButton.addEventListener('click', e => {
+    moveToNextSlide();
+  });
+</script>
+
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .student-image {
+    width: 200px; /* Ajustar el tamaño de las imágenes */
+    height: 200px; /* Ajustar el tamaño de las imágenes */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+  }
+
+  .student-info {
+    text-align: center;
+  }
+  .student-name {
+    font-weight: bold;
+  }
+  .student-subtitle {
+    font-size: 14px;
+    color: gray;
+  }
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black; /* Color del texto de las flechas */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.5; /* Añadir opacidad */
+    transition: opacity 0.3s ease; /* Agregar transición */
+    background-color: transparent; /* Fondo transparente */
+  }
+  .carousel-control:hover {
+    opacity: 1; /* Cambiar la opacidad al pasar el ratón */
+  }
+  .carousel-control.prev {
+    left: 10px;
+  }
+  .carousel-control.next {
+    right: 10px;
+  }
+  .student-image {
+    width: 200px; /* Ajustar el tamaño de las imágenes */
+    height: 200px; /* Ajustar el tamaño de las imágenes */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+</style>

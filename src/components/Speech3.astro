@@ -1,53 +1,138 @@
 ---
-import Section from "./Section.astro"
-import FooterMenu from "./FooterMenu.astro"
+import Section from "./Section.astro";
 ---
 
 <Section
-  title="Speech 3"
-  subtitle="Ladies and Gentlemen, esteemed guests, beloved families, and most importantly, my fellow graduates.<br>It is with great honor and profound joy that I stand before you today, as we celebrate an Another achievement in our lives. Today marks the culmination of a journey that began in this institution , a journey filled with dedication, perseverance, and the shared pursuit of mastering the English language.<br>Reflecting on the past few years, it's impossible not to marvel at how far we've come. When we embarked on this path, many of us were filled with trepidation, uncertain of our abilities and doubting whether we could rise to the challenge. Yet, despite the obstacles and the unforeseen global events that reshaped our world, we persevered. We adapted, we grew, and we thrived.<br>This journey has been about more than learning a new language. It has been about embracing a new culture, broadening our perspectives, and connecting with others in ways that would have been impossible otherwise.<br>We have learned to think critically, to express ourselves clearly and convincingly, and to listen with empathy and understanding. None of this would have been possible without the unwavering support of our different teachers, who not only imparted knowledge but also inspired us to push beyond our limits. They believed in our potential even when we doubted it ourselves. To them, we owe a debt of gratitude that words can scarcely express.<br>To our families and friends, thank you for your patience, encouragement, and love. Your support has been our anchor and our motivation, driving us to achieve our goals and to persevere through the toughest times.<br>And to my fellow graduates, I am incredibly proud of each and every one of you. We have proven that with determination and hard work, we can overcome any challenge. We have not only learned a language; we have gained confidence, resilience, and the courage to face the unknown.<br>Today, we celebrate not just the end of our course but the beginning of a new chapter in our lives. Let us step into this future with hope, courage, and the knowledge that we are equipped to make a difference.<br>Congratulations, Class C1 of 2024."  color="white"
-  subtitle2="Thank you."  color="white"
+  title="Students"
+  subtitle="Our graduating class of 2024."
+  color="white"
   id="speech-3"
-  imageSrc="/model-y.webp"
-  name="Persona 3"
-  description="Subtitle 3"
-  reverseLayout
->
-  <div slot="footer" style="margin-top: 30px; display: flex; justify-content: center;">
-    <FooterMenu />
-  </div>
+/>
 
+<footer
+  class="py-3 px-10 flex justify-center items-center w-full z-40 text-gray-600 text-xs font-medium"
+  id="landing-footer"
+>
+  <nav>
+    <ul class="flex [&>li>a]:inline-block [&>li>a]:px-2 [&>li>a]:py-2">
+      <li><a href="#">Juan Rojas © 2023</a></li>
+      <li><a href="#">Privacidad y legal</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script>
+  const track = document.getElementById('carousel-track');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+
+  let currentIndex = 0;
+  const slides = Array.from(track.children);
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  const intervalTime = 3000; // Intervalo de 3 segundos
+
+  // Función para mover al siguiente slide
+  const moveToNextSlide = () => {
+    currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+    moveToSlide(currentIndex);
+  };
+
+  // Función para mover al slide indicado
+  const moveToSlide = (targetIndex) => {
+    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+    currentIndex = targetIndex;
+  };
+
+  // Iniciar el carrusel automático
+  const startCarousel = () => {
+    setInterval(moveToNextSlide, intervalTime);
+  };
+
+  // Iniciar el carrusel automáticamente
+  startCarousel();
+
+  // Event listeners para los botones de control
+  prevButton.addEventListener('click', e => {
+    currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+    moveToSlide(currentIndex);
+  });
+
+  nextButton.addEventListener('click', e => {
+    moveToNextSlide();
+  });
+</script>
+
+<style>
   <style>
-    /* Estilos para móvil pequeño */
-    @media (max-width: 360px) {
-      #speech-3 {
-        font-size: 14px;
-        line-height: 1.2;
-      }
-    }
-  
-    /* Estilos para móvil medio */
-    @media (min-width: 361px) and (max-width: 375px) {
-      #speech-3 {
-        font-size: 16px;
-        line-height: 1.3;
-      }
-    }
-  
-    /* Estilos para móvil grande */
-    @media (min-width: 376px) and (max-width: 720px) {
-      #speech-3 {
-        font-size: 18px;
-        line-height: 1.4;
-      }
-    }
-  
-    /* Estilos para tablet y superior */
-    @media (min-width: 721px) {
-      #speech-3 {
-        font-size: 20px;
-        line-height: 1.5;
-      }
-    }
-  </style>
-</Section>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .student-image {
+    width: 200px; /* Ajustar el tamaño de las imágenes */
+    height: 200px; /* Ajustar el tamaño de las imágenes */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Agregar sombra */
+  }
+
+  .student-info {
+    text-align: center;
+  }
+  .student-name {
+    font-weight: bold;
+  }
+  .student-subtitle {
+    font-size: 14px;
+    color: gray;
+  }
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black; /* Color del texto de las flechas */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.5; /* Añadir opacidad */
+    transition: opacity 0.3s ease; /* Agregar transición */
+    background-color: transparent; /* Fondo transparente */
+  }
+  .carousel-control:hover {
+    opacity: 1; /* Cambiar la opacidad al pasar el ratón */
+  }
+  .carousel-control.prev {
+    left: 10px;
+  }
+  .carousel-control.next {
+    right: 10px;
+  }
+  .student-image {
+    width: 200px; /* Ajustar el tamaño de las imágenes */
+    height: 200px; /* Ajustar el tamaño de las imágenes */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+</style>
