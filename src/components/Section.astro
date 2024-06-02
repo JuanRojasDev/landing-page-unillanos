@@ -169,4 +169,65 @@ const textColor = 'text-black';
     object-fit: cover;
     margin-bottom: 10px;
   }
+
+  /* Estilos responsivos para el carrusel */
+  @media (max-width: 360px) {
+    .carousel-container {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+
+    .student-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 361px) and (max-width: 720px) {
+    .carousel-container {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+
+    .student-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 721px) {
+    .carousel-container {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+
+    .student-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
+  }
 </style>
