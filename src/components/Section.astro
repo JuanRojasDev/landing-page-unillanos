@@ -13,14 +13,14 @@ const textColor = 'text-black';
       <h2 class={`${textColor} pt-20 text-[40px] font-medium`}>
         {title}
       </h2>
-      <p class="text-black text-sm" style="background-color: transparent; padding: 50px 20px; line-height: 1.6; margin: 0 auto; max-width: 800px; font-size: 18px;">
+      <p class="text-black text-sm description-text">
         {subtitle}
       </p>
     </header>
 
-    <div class={`flex flex-col items-start ${reverseLayout ? 'flex-row-reverse' : 'flex-row'} mt-6`}>
-      <img src={imageSrc} alt={name} class="w-32 h-32 rounded-full object-cover" />
-      <div class="flex flex-col items-start ml-6">
+    <div class={`content-container ${reverseLayout ? 'flex-row-reverse' : 'flex-row'} mt-6`}>
+      <img src={imageSrc} alt={name} class="profile-image" />
+      <div class="info-container">
         <h3 class="text-lg font-semibold mt-4">{name}</h3>
         <div class="border-t border-gray-300 w-20 my-2"></div>
         <p class="text-gray-600 text-sm">{description}</p>
@@ -28,7 +28,7 @@ const textColor = 'text-black';
     </div>
 
     {id === 'speech-3' && (
-      <div class="carousel-container">
+      <div class="carousel-container mt-10">
         <div class="carousel-track" id="carousel-track">
           {Array.from({ length: 13 }).map((_, i) => (
             <div class="carousel-slide" style={{ flex: '0 0 100%' }}>
@@ -44,6 +44,7 @@ const textColor = 'text-black';
         <button class="carousel-control next" id="next">&#10095;</button>
       </div>
     )}
+  </div>
 
   <div class="absolute top-0 bottom-0 h-full w-full z-10">
     <slot name="background" />
@@ -55,50 +56,51 @@ const textColor = 'text-black';
     display: flex;
     flex-direction: column;
   }
-</style>
 
-<script>
-  const track = document.getElementById('carousel-track');
-  const prevButton = document.getElementById('prev');
-  const nextButton = document.getElementById('next');
+  .description-text {
+    background-color: transparent;
+    padding: 20px 20px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 800px;
+    font-size: 18px;
+  }
 
-  let currentIndex = 0;
-  const slides = Array.from(track.children);
-  const slideWidth = slides[0].getBoundingClientRect().width;
-  const intervalTime = 3000; // Intervalo de 3 segundos
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-  // Función para mover al siguiente slide
-  const moveToNextSlide = () => {
-    currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-    moveToSlide(currentIndex);
-  };
+  .profile-image {
+    width: 128px; /* 32px en Tailwind CSS */
+    height: 128px; /* 32px en Tailwind CSS */
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
-  // Función para mover al slide indicado
-  const moveToSlide = (targetIndex) => {
-    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
-    currentIndex = targetIndex;
-  };
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    margin-top: 16px;
+  }
 
-  // Iniciar el carrusel automático
-  const startCarousel = () => {
-    setInterval(moveToNextSlide, intervalTime);
-  };
+  @media (min-width: 640px) {
+    .content-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
 
-  // Iniciar el carrusel automáticamente
-  startCarousel();
+    .info-container {
+      margin-left: 24px; /* 6 en Tailwind CSS */
+      margin-top: 0;
+    }
+  }
 
-  // Event listeners para los botones de control
-  prevButton.addEventListener('click', e => {
-    currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-    moveToSlide(currentIndex);
-  });
-
-  nextButton.addEventListener('click', e => {
-    moveToNextSlide();
-  });
-</script>
-
-<style>
   .carousel-container {
     position: relative;
     width: 100%;
@@ -106,12 +108,14 @@ const textColor = 'text-black';
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px; /* Ajuste el margen superior del carrusel */
   }
+
   .carousel-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
   }
+
   .carousel-slide {
     min-width: 100%;
     box-sizing: border-box;
@@ -133,13 +137,16 @@ const textColor = 'text-black';
   .student-info {
     text-align: center;
   }
+
   .student-name {
     font-weight: bold;
   }
+
   .student-subtitle {
     font-size: 14px;
     color: gray;
   }
+
   .carousel-control {
     position: absolute;
     top: 50%;
@@ -153,21 +160,17 @@ const textColor = 'text-black';
     transition: opacity 0.3s ease; /* Agregar transición */
     background-color: transparent; /* Fondo transparente */
   }
+
   .carousel-control:hover {
     opacity: 1; /* Cambiar la opacidad al pasar el ratón */
   }
+
   .carousel-control.prev {
     left: 10px;
   }
+
   .carousel-control.next {
     right: 10px;
-  }
-  .student-image {
-    width: 200px; /* Ajustar el tamaño de las imágenes */
-    height: 200px; /* Ajustar el tamaño de las imágenes */
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
   }
 
   /* Estilos responsivos para el carrusel */
@@ -231,3 +234,44 @@ const textColor = 'text-black';
     }
   }
 </style>
+
+<script>
+  const track = document.getElementById('carousel-track');
+  const prevButton = document.getElementById('prev');
+  const nextButton = document.getElementById('next');
+
+  let currentIndex = 0;
+  const slides = Array.from(track.children);
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  const intervalTime = 3000; // Intervalo de 3 segundos
+
+  // Función para mover al siguiente slide
+  const moveToNextSlide = () => {
+    currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+    moveToSlide(currentIndex);
+  };
+
+  // Función para mover al slide indicado
+  const moveToSlide = (targetIndex) => {
+    track.style.transform = 'translateX(-' + slideWidth * targetIndex + 'px)';
+    currentIndex = targetIndex;
+  };
+
+  // Iniciar el carrusel automático
+  const startCarousel = () => {
+    setInterval(moveToNextSlide, intervalTime);
+  };
+
+  // Iniciar el carrusel automáticamente
+  startCarousel();
+
+  // Event listeners para los botones de control
+  prevButton.addEventListener('click', e => {
+    currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+    moveToSlide(currentIndex);
+  });
+
+  nextButton.addEventListener('click', e => {
+    moveToNextSlide();
+  });
+</script>

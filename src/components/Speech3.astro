@@ -64,7 +64,6 @@ import Section from "./Section.astro";
 </script>
 
 <style>
-  <style>
   .carousel-container {
     position: relative;
     width: 100%;
@@ -72,7 +71,7 @@ import Section from "./Section.astro";
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px; /* Ajuste el margen superior del carrusel */
   }
   .carousel-track {
     display: flex;
@@ -128,11 +127,85 @@ import Section from "./Section.astro";
   .carousel-control.next {
     right: 10px;
   }
-  .student-image {
-    width: 200px; /* Ajustar el tamaño de las imágenes */
-    height: 200px; /* Ajustar el tamaño de las imágenes */
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+
+  /* Estilos responsivos para el carrusel */
+  @media (max-width: 360px) {
+    .carousel-container {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+
+    .student-image {
+      width: 120px;
+      height: 120px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 361px) and (max-width: 720px) {
+    .carousel-container {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+
+    .student-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 721px) and (max-width: 1024px) {
+    .carousel-container {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 10px;
+    }
+
+    .student-image {
+      width: 180px;
+      height: 180px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .carousel-container {
+      flex-direction: row;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 20px;
+    }
+
+    .student-image {
+      width: 200px;
+      height: 200px;
+    }
+
+    .carousel-control {
+      font-size: 18px;
+    }
   }
 </style>
