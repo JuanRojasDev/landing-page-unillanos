@@ -1,5 +1,21 @@
 ---
 import Section from "./Section.astro";
+
+const students = [
+  { src: '/student-1.webp', name: 'Maria Camila Romero', subtitle: 'Industrial Engineer' },
+  { src: '/student-2.webp', name: 'Valeria Arias Villa', subtitle: 'Medical Doctor' },
+  { src: '/model-y.webp', name: 'Student 3', subtitle: 'Subtitle 3' },
+  { src: '/model-y.webp', name: 'Student 4', subtitle: 'Subtitle 4' },
+  { src: '/student-5.webp', name: 'Laura Valeria Jiménez', subtitle: 'Multimedia Producer' },
+  { src: '/model-y.webp', name: 'Student 6', subtitle: 'Subtitle 6' },
+  { src: '/student-7.webp', name: 'Nicolle Piñeros Toro', subtitle: 'International Business Professional' },
+  { src: '/student-8.webp', name: 'Sofia Valentian Rincón', subtitle: 'Subtitle 8' },
+  { src: '/student-9.webp', name: 'Juan Andrés Rojas', subtitle: 'Software Engineer' },
+  { src: '/model-y.webp', name: 'Student 10', subtitle: 'Subtitle 10' },
+  { src: '/model-y.webp', name: 'Student 11', subtitle: 'Subtitle 11' },
+  { src: '/student-12.webp', name: 'Juan Esteban Vega', subtitle: 'Bachelor in Mathematics' },
+  { src: '/model-y.webp', name: 'Student 13', subtitle: 'Subtitle 13' },
+];
 ---
 
 <Section
@@ -7,10 +23,17 @@ import Section from "./Section.astro";
   subtitle="Our graduating class of 2024."
   color="white"
   id="speech-3"
+  students={students}
 />
 
+<div class="container mx-auto p-4 md:p-8 max-w-screen-lg">
+  <div class="border border-black">
+    <div class="bg-cover bg-center h-64 md:h-96 lg:h-120" style="background-image: url('/classroom.webp')"></div>
+  </div>
+</div>
+
 <footer
-  class="py-3 px-10 flex justify-center items-center w-full z-40 text-gray-600 dark:text-gray-300 text-xs font-medium"
+  class="py-4 px-10 flex justify-center items-center w-full z-20 text-gray-600 dark:text-gray-300 text-xs font-medium"
   id="landing-footer"
 >
   <nav>
@@ -21,3 +44,70 @@ import Section from "./Section.astro";
     </ul>
   </nav>
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('carousel-track');
+    const prevButton = document.querySelector('#prev');
+    const nextButton = document.querySelector('#next');
+
+    let currentIndex = 0;
+    const slides = Array.from(track.children);
+    const intervalTime = 3000; // Intervalo de 3 segundos
+    let autoSlideInterval;
+
+    // Función para mover al siguiente slide
+    const moveToNextSlide = () => {
+      currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+      updateSlides();
+    };
+
+    // Función para mover al slide anterior
+    const moveToPrevSlide = () => {
+      currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+      updateSlides();
+    };
+
+    // Actualizar las clases de los slides para mostrar las vistas previas
+    const updateSlides = () => {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('prev', 'current', 'next');
+        if (index === currentIndex) {
+          slide.classList.add('current');
+        } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+          slide.classList.add('prev');
+        } else if (index === (currentIndex + 1) % slides.length) {
+          slide.classList.add('next');
+        }
+      });
+
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+    };
+
+    // Iniciar el carrusel automático
+    const startCarousel = () => {
+      autoSlideInterval = setInterval(moveToNextSlide, intervalTime);
+    };
+
+    // Pausar el carrusel automático
+    const pauseCarousel = () => {
+      clearInterval(autoSlideInterval);
+    };
+
+    // Event listeners para los botones de control
+    prevButton.addEventListener('click', () => {
+      pauseCarousel();
+      moveToPrevSlide();
+    });
+
+    nextButton.addEventListener('click', () => {
+      pauseCarousel();
+      moveToNextSlide();
+    });
+
+    // Inicializar las vistas previas
+    updateSlides();
+    startCarousel();
+  });
+</script>

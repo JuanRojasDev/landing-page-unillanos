@@ -4,7 +4,7 @@ import Logo from "./Logo.astro"
 
 <header
   id="landing-header"
-  class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-black"
+  class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 bg-white text-black"
 >
   <div class="flex flex-grow basis-0">
     <a href="./"><Logo /></a>
@@ -29,20 +29,18 @@ import Logo from "./Logo.astro"
     </ul>
   </nav>
 
-  <nav id="modal-menu" class=" hidden xl:hidden flex flex-col bg-white fixed top-0 left-0 right-0 bottom-0 ">
-    <button id="close-btn" class=" w-screen flex justify-end p-5">
-      <img  class="text-black h-6 " src="/close-icon.svg" alt="close image">
+  <nav id="modal-menu" class="hidden xl:hidden flex flex-col bg-white fixed top-0 left-0 right-0 bottom-0 overflow-y-hidden">
+    <button id="close-btn" class="w-screen flex justify-end p-5">
+      <img class="text-black h-6" src="/close-icon.svg" alt="close image">
     </button>
-      <ul
-      class="flex flex-col mt-4 [&>li>a]:transition-colors [&>li]:m-3  [&>li>a]:flex [&>li>a]:justify-between [&>li>a]:duration-200 [&>li>a]:text-black [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-6 [&>li>a]:py-3 [&>li>a]:rounded-md [&>li>a]:w-full"
-      >
-        <li><a class="hover:bg-slate-100" href="#home"> Home <img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a> </li>
-        <li><a class="hover:bg-slate-100" href="#speech-1">Speech EN<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
-        <li><a class="hover:bg-slate-100" href="#speech-2">Speech ES<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
-        <li><a class="hover:bg-slate-100" href="#speech-3">Students<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
-        <li><a class="hover:bg-slate-100" href="#powerwall">Modo<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
+    <ul class="flex flex-col mt-4 [&>li>a]:transition-colors [&>li]:m-3  [&>li>a]:flex [&>li>a]:justify-between [&>li>a]:duration-200 [&>li>a]:text-black [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-6 [&>li>a]:py-3 [&>li>a]:rounded-md [&>li>a]:w-full">
+      <li><a class="hover:bg-slate-100" href="#home"> Home <img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a> </li>
+      <li><a class="hover:bg-slate-100" href="#speech-1">Speech EN<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
+      <li><a class="hover:bg-slate-100" href="#speech-2">Speech ES<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
+      <li><a class="hover:bg-slate-100" href="#speech-3">Students<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
+      <li><a class="hover:bg-slate-100" href="#powerwall">Modo<img class="h-5" alt="arrow icon" src="/arrow-icon.svg"></a></li>
     </ul>
-  </nav>
+  </nav>  
 
 </header>
 
@@ -65,39 +63,4 @@ import Logo from "./Logo.astro"
     Item.addEventListener('click',toggleDropdownMenu);
 });
 
-</script>
-
-
-<script>
-  const listItem = document.querySelectorAll("#landing-header li")
-  const menuBackDrop = document.querySelector("#menu-backdrop") as HTMLElement
-
-  listItem.forEach((item) => {
-    item.addEventListener("mouseenter", () => {
-      const { left, top, width, height } = item.getBoundingClientRect()
-
-      menuBackDrop.style.setProperty("--left", `${left}px`)
-      menuBackDrop.style.setProperty("--top", `${top}px`)
-      menuBackDrop.style.setProperty("--width", `${width}px`)
-      menuBackDrop.style.setProperty("--height", `${height}px`)
-
-      menuBackDrop.style.opacity = "1"
-      menuBackDrop.style.visibility = "visible"
-    })
-
-    item.addEventListener("mouseleave", () => {
-      menuBackDrop.style.opacity = "0"
-      menuBackDrop.style.visibility = "hidden"
-    })
-  })
-</script>
-
-<script>
-  const headerEl = document.querySelector("#landing-header") as HTMLElement
-
-  const observerOptions = {
-    root: null,
-    rootMargin: "0px", // en cuanto se vea el elemento
-    threshold: 0.9, // porcentaje de visibilidad
-  }
 </script>
