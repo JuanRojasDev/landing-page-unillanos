@@ -1,1 +1,2 @@
-![Captura-2023-05-15 001320](https://github.com/midudev/landing-tesla/assets/1561955/7aa648fc-0824-4ad1-9a36-7b2e4d272b53)
+![image](https://github.com/JuanRojasDev/landing-page-unillanos/assets/114270458/1ae8ef4b-5976-46f3-a734-bf104aeef405)
+
