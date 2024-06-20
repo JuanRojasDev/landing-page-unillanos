@@ -1,5 +1,5 @@
 ---
-const { color, title, subtitle , id, students } = Astro.props;
+const { color, title, subtitle, id, students, memories } = Astro.props;
 const textColor = 'text-black';
 ---
 
@@ -18,186 +18,275 @@ const textColor = 'text-black';
   </header>
 
   {id === 'speech-3' && (
-    <div class="carousel-container mt-0">
-      <div class="carousel-track" id="carousel-track">
-        {students.map((student, i) => (
-          <div class="carousel-slide" style={{ flex: '0 0 100%' }}>
-            <img src={student.src} alt={`Student ${i + 1}`} class="student-image" />
-            <div class="student-info">
-              <p class="student-name">{student.name}</p>
-              <p class="student-subtitle">{student.subtitle}</p>
+      <div class="carousel-container mt-0">
+        <div class="carousel-track" id="carousel-track-students">
+          {students.map((student, i) => (
+            <div class="carousel-slide" style={{ flex: '0 0 100%' }}>
+              <img src={student.src} alt={`Student ${i + 1}`} class="student-image" />
+              <div class="student-info">
+                <p class="student-name">{student.name}</p>
+                <p class="student-subtitle">{student.subtitle}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <button class="carousel-control prev" id="prev-students">&#10094;</button>
+        <button class="carousel-control next" id="next-students">&#10095;</button>
       </div>
-      <button class="carousel-control prev" id="prev">&#10094;</button>
-      <button class="carousel-control next" id="next">&#10095;</button>
-    </div>
-  )}
-</section3>
+    )}
+  
+  {memories && (
+    <>
+      <header>
+        <h2 class={`${textColor} pt-20 text-[40px] font-medium`}>
+          Memories
+        </h2>
+      </header>
+      <div class="carousel-container mt-0 mx-auto p-4 md:p-8 max-w-screen-lg">
+        <div class="carousel-container mt-0 border border-black relative">
+          <div class="carousel-track" id="carousel-track-memories">
+            {memories.map((memory, i) => (
+              <div class="carousel-slide h-64 md:h-96 lg:h-120 p-0 m-0" key={i}>
+                <img src={memory.src} alt={`Memory ${i + 1}`} class="carousel-image" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <button class="carousel-control prev" id="prev-memories">&#10094;</button>
+        <button class="carousel-control next" id="next-memories">&#10095;</button>
+      </div>
+    </>
+  )}  
+  </section3>
 
 <style>
-  .landing-section {
-    display: flex;
-    flex-direction: column;
-    margin: 0; /* Remove margin */
-    padding: 0; /* Remove padding */
-  }
 
-  .description-text {
-    background-color: transparent;
-    padding: 10px 10px; /* Reduced padding */
-    line-height: 1.6;
-    margin: 0 auto;
-    max-width: 800px;
-    font-size: 18px;
-  }
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
 
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+}
+
+.student-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.student-info {
+  text-align: center;
+}
+
+.student-name {
+  font-weight: bold;
+}
+
+.student-subtitle {
+  font-size: 14px;
+  color: gray;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  background-color: transparent;
+}
+
+#prev-memories {
+  left: 10px; /* Ajustado para que no se superponga */
+}
+
+#next-memories {
+  right: 10px; /* Ajustado para que no se superponga */
+}
+
+.carousel-control:hover {
+  opacity: 1;
+}
+
+.carousel-control.prev {
+  left: -30px; /* Mover el botón a la izquierda */
+}
+
+.carousel-control.next {
+  right: -30px; /* Mover el botón a la derecha */
+}
+
+.carousel-slide.current .student-image {
+  width: 300px;
+  height: 300px;
+}
+
+.carousel-slide.current ~ .carousel-slide .student-image,
+.carousel-slide.prev .student-image,
+.carousel-slide.next .student-image {
+  width: 150px;
+  height: 150px;
+}
+
+.footer {
+  margin: 0; /* Remove margin */
+}
+
+@media (max-width: 360px) {
   .carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0; /* Remove margin */
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+    flex-direction: column;
   }
 
   .carousel-slide {
     min-width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 10px;
   }
 
   .student-image {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .student-info {
-    text-align: center;
-  }
-
-  .student-name {
-    font-weight: bold;
-  }
-
-  .student-subtitle {
-    font-size: 14px;
-    color: gray;
-  }
-
-  .carousel-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: black;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-    background-color: transparent;
-  }
-
-  .carousel-control:hover {
-    opacity: 1;
-  }
-
-  .carousel-control.prev {
-    left: 10px;
-  }
-
-  .carousel-control.next {
-    right: 10px;
-  }
-
-  .carousel-slide.current .student-image {
-    width: 300px;
-    height: 300px;
-  }
-
-  .carousel-slide.current ~ .carousel-slide .student-image,
-  .carousel-slide.prev .student-image,
-  .carousel-slide.next .student-image {
     width: 150px;
     height: 150px;
   }
 
-  .footer {
-    margin: 0; /* Remove margin */
+  .carousel-control {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 720px) {
+  .carousel-container {
+    flex-direction: column;
   }
 
-  @media (max-width: 360px) {
-    .carousel-container {
-      flex-direction: column;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      padding: 10px;
-    }
-
-    .student-image {
-      width: 150px;
-      height: 150px;
-    }
-
-    .carousel-control {
-      font-size: 18px;
-    }
+  .carousel-slide {
+    min-width: 100%;
+    padding: 10px;
   }
 
-  @media (min-width: 361px) and (max-width: 720px) {
-    .carousel-container {
-      flex-direction: column;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      padding: 10px;
-    }
-
-    .student-image {
-      width: 150px;
-      height: 150px;
-    }
-
-    .carousel-control {
-      font-size: 18px;
-    }
+  .student-image {
+    width: 150px;
+    height: 150px;
   }
 
-  @media (min-width: 721px) {
-    .carousel-container {
-      flex-direction: column;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      padding: 10px;
-    }
-
-    .student-image {
-      width: 150px;
-      height: 150px;
-    }
-
-    .carousel-control {
-      font-size: 18px;
-    }
+  .carousel-control {
+    font-size: 18px;
   }
+}
+
+@media (min-width: 721px) {
+  .carousel-container {
+    flex-direction: column;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .student-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .carousel-control {
+    font-size: 18px;
+  }
+}
+
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const setupCarousel = (trackId, prevButtonId, nextButtonId) => {
+      const track = document.getElementById(trackId);
+      const prevButton = document.getElementById(prevButtonId);
+      const nextButton = document.getElementById(nextButtonId);
+
+      let currentIndex = 0;
+      const slides = Array.from(track.children);
+      const intervalTime = 3000; // Intervalo de 3 segundos
+      let autoSlideInterval;
+
+      const moveToNextSlide = () => {
+        currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+        updateSlides();
+      };
+
+      const moveToPrevSlide = () => {
+        currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+        updateSlides();
+      };
+
+      const updateSlides = () => {
+        slides.forEach((slide, index) => {
+          slide.classList.remove('prev', 'current', 'next');
+          if (index === currentIndex) {
+            slide.classList.add('current');
+          } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+            slide.classList.add('prev');
+          } else if (index === (currentIndex + 1) % slides.length) {
+            slide.classList.add('next');
+          }
+        });
+
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = 'translateX(-' + slideWidth * currentIndex + 'px)';
+      };
+
+      const startCarousel = () => {
+        autoSlideInterval = setInterval(moveToNextSlide, intervalTime);
+      };
+
+      const pauseCarousel = () => {
+        clearInterval(autoSlideInterval);
+      };
+
+      prevButton.addEventListener('click', () => {
+        pauseCarousel();
+        moveToPrevSlide();
+      });
+
+      nextButton.addEventListener('click', () => {
+        pauseCarousel();
+        moveToNextSlide();
+      });
+
+      updateSlides();
+      startCarousel();
+    };
+
+    setupCarousel('carousel-track-students', 'prev-students', 'next-students');
+    setupCarousel('carousel-track-memories', 'prev-memories', 'next-memories');
+  });
+</script>
