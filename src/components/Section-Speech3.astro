@@ -68,7 +68,14 @@ const textColor = 'text-black';
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin: 0 auto;
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .carousel-track {
@@ -129,11 +136,11 @@ const textColor = 'text-black';
 }
 
 #prev-memories {
-  left: 10px; /* Ajustado para que no se superponga */
+  left: 10px;
 }
 
 #next-memories {
-  right: 10px; /* Ajustado para que no se superponga */
+  right: 10px;
 }
 
 .carousel-control:hover {
@@ -141,11 +148,11 @@ const textColor = 'text-black';
 }
 
 .carousel-control.prev {
-  left: -30px; /* Mover el botón a la izquierda */
+  left: 10px;
 }
 
 .carousel-control.next {
-  right: -30px; /* Mover el botón a la derecha */
+  right: 10px;
 }
 
 .carousel-slide.current .student-image {
@@ -161,7 +168,7 @@ const textColor = 'text-black';
 }
 
 .footer {
-  margin: 0; /* Remove margin */
+  margin: 0;
 }
 
 @media (max-width: 360px) {
