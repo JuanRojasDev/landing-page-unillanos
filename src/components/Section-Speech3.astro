@@ -46,7 +46,7 @@ const textColor = 'text-black';
         <div class="carousel-container mt-0 border border-black relative">
           <div class="carousel-track" id="carousel-track-memories">
             {memories.map((memory, i) => (
-              <div class="carousel-slide h-64 md:h-96 lg:h-120 p-0 m-0" key={i}>
+              <div class="carousel-slide h-64 md:h-96 lg:h-120 p-0 m-0">
                 <img src={memory.src} alt={`Memory ${i + 1}`} class="carousel-image" />
               </div>
             ))}
